@@ -1,0 +1,23 @@
+{
+  "name": "nyaaysahaayak-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "react.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "Frontend": "cd Frontend && npm start",
+    "Backend": "cd Backend && npm start",
+    "dev": "concurrently \"npm run Frontend\" \"npm run Backend\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "concurrently": "^8.2.2",
+    "lucide-react": "^0.263.1",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

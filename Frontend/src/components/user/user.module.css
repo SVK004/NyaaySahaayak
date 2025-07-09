@@ -1,0 +1,97 @@
+.userblock {
+    position: relative;
+    width: 300px;
+    height: fit-content;
+    border-radius: 8px;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 10px;
+    top: -5px;
+    background-color: white;
+    z-index: 1;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: fit-content;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    height: fit-content;
+    position: relative;
+    z-index: 2;
+    width: auto;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(241, 241, 241, 0.35);
+    border-radius: 8px;
+    margin: 20px 10px;
+}
+
+.info2 ul {
+    width: 220px;
+    margin: 12px 0;
+    padding: 0 15px;
+}
+.info2 ul p{
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.box {
+    background-color: rgb(183, 183, 183);
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+}
+.step1{
+    margin-left: 20px;
+    padding-bottom: 20px;
+    color: grey;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    transition: margin-left 0.3s ease-in-out;
+}
+.step2{
+    margin-left: 20px;
+    padding-bottom: 30px;
+    color: grey;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    transition: margin-left 0.3s ease-in-out;
+}
+.step1:hover, .step2:hover{
+    margin-left: 30px;
+    color: rgb(200, 131, 2);
+}
+.step3{
+  padding: 20px 0;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+.step3:hover{
+    color: rgb(200, 131, 2);
+}
+.step1 p, .step2 p, .step3 p {
+    margin: 0;
+    margin-left: 15px;
+}

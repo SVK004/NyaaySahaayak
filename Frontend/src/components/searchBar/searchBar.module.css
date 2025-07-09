@@ -1,0 +1,49 @@
+.searchbox textarea::-webkit-scrollbar {
+    width: 0;/*disables the scroll bar*/
+}
+
+/* Style for textarea */
+.searchbox textarea {
+    width: 100%;
+    margin: auto;
+    min-height: 30px;
+    max-height: 200px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    overflow-y: auto;
+    background-color: transparent;
+}
+
+.searchbox {
+    display: flex;
+    position: relative;
+    background-color: transparent;
+    width: 60%;
+    margin: auto;
+}
+
+.searchbox textarea::placeholder {
+    font-family: ubuntu;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.upload {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 5px;
+    background-color: #e4e4e4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.upload:active{
+    background-color: white;
+}

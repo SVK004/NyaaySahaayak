@@ -1,0 +1,8 @@
+# Ignore environment file inside Backend
+Backend/.env
+
+# Ignore node_modules inside Backend
+Backend/node_modules/
+
+# Ignore trash folder in root
+trash/
