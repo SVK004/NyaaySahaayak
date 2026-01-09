@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = ('path')
 
+let isnotDBConnected = true;
 // Connect to MongoDB
 mongoose.connect("mongodb://localhost:27017", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => {
+    isnotDBConnected = false;
     console.log("MongoDB connected");             //mongodb+srv://NHKusers:NHKusers@nhkusers.okqyjty.mongodb.net/NHK_users
 })
 .catch((error) => {
@@ -46,10 +50,30 @@ const ComponentSchema = new mongoose.Schema({
   });
   const Component = mongoose.model('Component', ComponentSchema);
 
+
+
+  async function getIPCData(query){
+    try {
+        // FIX: Use __dirname to locate ipc.json relative to this file
+        const jsonData = fs.readFileSync(path.join(__dirname, '../../ipc.json'), 'utf8');
+        localData = JSON.parse(jsonData);
+        console.log("Local JSON data loaded");
+
+        return await localData.filter(item => 
+            (item.section_title && item.section_title.toLowerCase().includes(query.toLowerCase())) || 
+            (item.keywords && item.keywords.toLowerCase().includes(query.toLowerCase()))
+        ).slice(0, 10);
+
+    } catch (err) {
+        console.error("Failed to load local JSON file");
+    }
+  }
 module.exports = {
-    UserModel,
-    user,
-    User,
-    Component,
-    SearchHistory
+  isnotDBConnected,
+  getIPCData,
+  UserModel,
+  user,
+  User,
+  Component,
+  SearchHistory
 };

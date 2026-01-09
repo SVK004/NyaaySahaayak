@@ -1,8 +1,22 @@
-# Ignore environment file inside Backend
-Backend/.env
-
-# Ignore node_modules inside Backend
+# Dependency directories
+node_modules/
 Backend/node_modules/
+Frontend/node_modules/
 
-# Ignore trash folder in root
+# Environment variables (Sensitive info)
+.env
+Backend/.env
+Frontend/.env.local
+
+# Build outputs
+Frontend/build/
+Frontend/dist/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
 trash/

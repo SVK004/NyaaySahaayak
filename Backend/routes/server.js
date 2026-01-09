@@ -70,6 +70,11 @@ router.get('/api/search', async (req, res) => {
     const { query } = req.query;
     console.log('Received search query:', query);
 
+    if(!isnotDBConnected){
+      const results = await getIPCData(query);
+      res.send(results);
+      return;
+    }
     const regex = new RegExp(query, 'i');
     const components = await Component.find({ name: regex }).limit(10);
     console.log('Search results:', components);
@@ -84,7 +89,6 @@ router.get('/api/search', async (req, res) => {
 router.post('/search', async (req, res) => {
   console.log("Received search query: ",req.body)
   const searchTerm = req.body.term;
-
   // Save search history to MongoDB
   const searchEntry = new SearchHistory({ content: `${searchTerm}`});
   await searchEntry.save();
