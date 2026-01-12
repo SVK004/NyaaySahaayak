@@ -54,6 +54,18 @@ for the core value of the application.
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Screen
+![Home Screen 1](screenshots/home_screen_1.png)
+![Home Screen 2](screenshots/home_screen_2.png)
+
+### 🔐 Authentication
+![Sign In](screenshots/signin.png)
+![Sign Up](screenshots/signup.png)
+
+---
+
 ## 🛠 Tech Stack
 
 ### Frontend
