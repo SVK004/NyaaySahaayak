@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
-const path = ('path')
+const path = require('path')
 
 let isnotDBConnected = true;
 // Connect to MongoDB
@@ -68,8 +68,13 @@ const ComponentSchema = new mongoose.Schema({
         console.error("Failed to load local JSON file");
     }
   }
+
+  function isDBDisconnected() {
+  return false;
+}
+
 module.exports = {
-  isnotDBConnected,
+  isDBDisconnected,
   getIPCData,
   UserModel,
   user,

@@ -1,5 +1,5 @@
 const express = require('express');
-const {User,SearchHistory, user,Component} = require('../db/index');
+const {User,SearchHistory, user,Component, getIPCData} = require('../db/index');
 const userMiddleware = require('../middlewares/normalLogin');
 const JWT_SECRET = require("../passwords");
 const cors = require('cors');
@@ -70,7 +70,7 @@ router.get('/api/search', async (req, res) => {
     const { query } = req.query;
     console.log('Received search query:', query);
 
-    if(!isnotDBConnected){
+    if(1){
       const results = await getIPCData(query);
       res.send(results);
       return;
