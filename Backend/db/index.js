@@ -70,7 +70,7 @@ const ComponentSchema = new mongoose.Schema({
   }
 
   function isDBDisconnected() {
-  return false;
+  return isnotDBConnected;
 }
 
 module.exports = {
