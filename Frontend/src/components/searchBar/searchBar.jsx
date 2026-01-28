@@ -62,15 +62,22 @@ function SearchBar({ sendDataToParent }) {
   }, [query])
 
   const handleSearch = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/api/search?query=${query}`);
-      setResults(response.data);
-      sendDataToParent(results,query);
-    } catch (error) {
-      console.error(error);
-      console.log("can't get query");
-    }
-  };
+  try {
+    console.log("Query", query);
+    const response = await axios.get(`http://localhost:3001/api/search?query=${query}`);
+    const freshData = response.data; // Capture the data directly
+    
+    setResults(freshData); 
+    console.log("Fresh Data:", freshData);
+    // Send freshData directly so the parent gets it on the FIRST click
+    sendDataToParent(freshData, query); 
+
+    setQuery('');
+    setSearchTerm('');
+  } catch (error) {
+    console.error("Query failed:", error);
+  }
+};
 
   return (
     <div className={Style.searchbox}>

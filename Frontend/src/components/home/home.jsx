@@ -52,8 +52,9 @@ function Home() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const handleDataFromChild = (data1,data2) => {
-    setResults(prevResults => [...prevResults, ...data1]);
-    setQuery(data2);
+    console.log("Data1: ", data1, "Data2: ", data2);
+    setResults(prevResults => [...prevResults, { question: data2, answer: data1 }]);
+    setQuery('');
   };
   useEffect(() => {
     // Render components only when results state changes
@@ -84,15 +85,25 @@ function Home() {
         <div className={Style.middle}>
           <div className={Style.queryboxbg}>
             <div className={Style.querybox}>
-                {results.map((component,index) => (
-                  <React.Fragment key={index}>
-                    <h4>{userDetails1.username.split('"').join('')}:</h4>
-                    <DialogueBox info={component.name} />
-                    <h4>NyaaySahayak:</h4>
-                    <DialogueBox info={component.description} />
-                  </React.Fragment>
-                ))}
-            </div>
+  {results.map((chatPair, index) => (
+    <React.Fragment key={index}>
+      {/* User Question */}
+      <div className={Style.userChat}>
+        <h4>{userDetails1.username.split('"').join('')}:</h4>
+        <DialogueBox info={chatPair.question} /> 
+      </div>
+
+      {/* NyaaySahayak Answer */}
+      <div className={Style.assistantChat}>
+        <h4>NyaaySahayak:</h4>
+        {/* chatPair.answer is the array returned from backend */}
+        {chatPair.answer.map((res, i) => (
+          <DialogueBox key={i} info={res.description} />
+        ))}
+      </div>
+    </React.Fragment>
+  ))}
+</div>
           </div>
         </div>
         <div className={Style.footer}>

@@ -136,28 +136,47 @@ while preserving consistent search logic.
 
 ---
 
-```md
 ### 📦 Setup Instructions
 
 #### 1️⃣ Clone the Repository
 ```bash
 git clone <repository-url>
+```
 
 #### 2️⃣ Ensure Data Availability
-
+```
 Ensure ipc.json exists in the project root directory.
+```
+## 3️⃣ 🚀 Getting Started
 
-#### 3️⃣ Backend Setup
+You can get the project up and running in two ways: the "Quick Start" (recommended) or manual setup.
+
+### 1️⃣ Quick Start (One Command)
+From the root directory, run the following commands:
+
+```bash
+# Install all dependencies for both Frontend and Backend
+npm run install-all
+
+# Run both services simultaneously
+npm run dev
+```
+
+### 2️⃣ Manual Setup
+
+If you prefer to run the services in separate terminals:
+```
+#### Backend Setup
 cd Backend
 npm install
 node index.js
 
-#### 4️⃣ Frontend Setup
+#### Frontend Setup
 cd Frontend
 npm install
 npm start
 ```
-📂 Directory Structure
+### 📂 Directory Structure
 ```
 NyaaySahaayak/
 ├── ipc.json                # Root IPC dataset (search fallback)
