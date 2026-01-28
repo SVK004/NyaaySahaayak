@@ -68,20 +68,20 @@ router.post("/logg", async (req, res) => {
 router.get('/api/search', async (req, res) => {
   try {
     const { query } = req.query;
-    console.log('Received search query:', query);
-
-    if(isDBDisconnected()){
-      const results = await getIPCData(query);
-      res.send(results);
-      return;
-    }
+    console.log(query)
     const regex = new RegExp(query, 'i');
-    const components = await Component.find({ name: regex }).limit(10);
-    console.log('Search results:', components);
     
+    // 1. Try DB first
+    let components = await Component.find({ name: regex }).limit(10);
+    
+    // 2. If DB results are empty, fallback to local JSON automatically
+    if (components.length === 0) {
+      components = await getIPCData(query);
+    }
+    
+    console.log(components);
     res.json(components);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }
 });

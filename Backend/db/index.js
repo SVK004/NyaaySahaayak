@@ -52,22 +52,49 @@ const ComponentSchema = new mongoose.Schema({
 
 
 
-  async function getIPCData(query){
+  // Inside Backend/db/index.js
+async function getIPCData(query) {
     try {
-        // FIX: Use __dirname to locate ipc.json relative to this file
         const jsonData = fs.readFileSync(path.join(__dirname, '../../ipc.json'), 'utf8');
-        localData = JSON.parse(jsonData);
+        const localData = JSON.parse(jsonData);
         console.log("Local JSON data loaded");
 
-        return await localData.filter(item => 
-            (item.section_title && item.section_title.toLowerCase().includes(query.toLowerCase())) || 
-            (item.keywords && item.keywords.toLowerCase().includes(query.toLowerCase()))
-        ).slice(0, 10);
+        // Split the user query into individual words (ignoring case)
+        const queryWords = query.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+
+        const results = localData.map(item => {
+            let matchCount = 0;
+            // Your JSON uses "keywords" and "section_title"
+            const itemKeywords = (item.keywords || "").toLowerCase();
+            const itemTitle = (item.section_title || "").toLowerCase();
+
+            // Check how many query words match the keywords or title
+            queryWords.forEach(word => {
+                if (itemKeywords.includes(word) || itemTitle.includes(word)) {
+                    matchCount++;
+                }
+            });
+
+            return { ...item, matchCount };
+        })
+        const bestMatch = results
+        .filter(item => item.matchCount > 0) // Only keep items that matched at least one word
+        .sort((a, b) => b.matchCount - a.matchCount) // Rank by highest number of matches
+        .slice(0, 10)
+
+        if(bestMatch.length === 0) return [];
+
+        return[{
+            // Map JSON keys to what your Frontend expects (name and description)
+            name: bestMatch[0].section_title,
+            description: bestMatch[0].section_desc
+        }];
 
     } catch (err) {
-        console.error("Failed to load local JSON file");
+        console.error("Failed to load or process local JSON file:", err);
+        return [];
     }
-  }
+}
 
   function isDBDisconnected() {
   return isnotDBConnected;
